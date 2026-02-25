@@ -8,7 +8,7 @@ use App\Services\Parsers\ParserFactoryInterface;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
-class ProcessSubscription
+class CheckPriceAction
 {
     public function __construct(
         private ?Subscription $subscription = null,

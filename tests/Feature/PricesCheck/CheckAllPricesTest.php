@@ -1,8 +1,8 @@
 <?php
 
-use App\Jobs\ProcessSubscription;
+use App\Jobs\PriceCheck;
 use App\Models\Subscription;
-use App\Services\Subscription\ProcessSubscriptions;
+use App\Services\Subscription\CheckAllPrices;
 use Illuminate\Support\Facades\Queue;
 
 it('dispatches jobs for each subscription', function () {
@@ -10,10 +10,10 @@ it('dispatches jobs for each subscription', function () {
 
     Subscription::factory()->count(10)->create();
 
-    $service = new ProcessSubscriptions;
+    $service = new CheckAllPrices;
     $service();
 
-    Queue::assertPushed(ProcessSubscription::class, 10);
+    Queue::assertPushed(PriceCheck::class, 10);
 });
 
 it('dispatches jobs for each subscription in chunks', function () {
@@ -21,8 +21,8 @@ it('dispatches jobs for each subscription in chunks', function () {
 
     Subscription::factory()->count(150)->create();
 
-    $service = new ProcessSubscriptions;
+    $service = new CheckAllPrices;
     $service();
 
-    Queue::assertPushed(ProcessSubscription::class, 150);
+    Queue::assertPushed(PriceCheck::class, 150);
 });

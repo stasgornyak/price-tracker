@@ -2,10 +2,10 @@
 
 namespace App\Services\Subscription;
 
-use App\Jobs\ProcessSubscription;
+use App\Jobs\PriceCheck;
 use App\Models\Subscription;
 
-class ProcessSubscriptions
+class CheckAllPrices
 {
     private const int CHUNK_SIZE = 100;
 
@@ -13,7 +13,7 @@ class ProcessSubscriptions
     {
         Subscription::query()->chunkById(self::CHUNK_SIZE, function ($subscriptions) {
             foreach ($subscriptions as $subscription) {
-                ProcessSubscription::dispatch($subscription);
+                PriceCheck::dispatch($subscription);
             }
         });
     }

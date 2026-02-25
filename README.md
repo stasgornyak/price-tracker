@@ -83,6 +83,41 @@ Mailpit captures all outgoing emails. You can access the dashboard to view notif
 5. If the price of the given URL was checked during the last 30/2 = 15 minutes (another subscription with the same URL), then a re-check is not performed.
 6. Check your **Mailpit** dashboard for notifications when prices change.
 
+## Diagram
+
+```mermaid
+sequenceDiagram
+    participant Scheduler
+    participant DB as SQLite
+    participant Queue
+    participant Job as PriceCheckJob
+    participant OLX
+    participant Mail
+
+    Scheduler->>DB: Get all subscriptions
+    loop Every 30 minutes
+        Scheduler->>Queue: Dispatch PriceCheckJob
+    end
+
+    Queue->>Job: Execute job
+
+    Job->>DB: Check if price checked recently
+    alt Checked less than 15 min ago
+        Job->>Job: Get stored price
+    else Not recently checked
+        Job->>OLX: Fetch listing page
+        Job->>Job: Parse current price
+    end
+    
+    Job->>DB: Compare with stored price
+    alt Price changed
+        Job->>DB: Update stored price and price_checked_at
+        Job->>Mail: Send notification email
+    else Price not changed
+        Job->>DB: Update price_checked_at
+    end
+```
+
 ## Running Tests
 
 To run the application's test suite, use the following command:

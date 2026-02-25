@@ -4,13 +4,13 @@ namespace App\Jobs;
 
 use App\Models\Subscription;
 use App\Services\Parsers\ParserFactoryInterface;
-use App\Services\Subscription\ProcessSubscription as ProcessSubscriptionAction;
+use App\Services\Subscription\CheckPriceAction;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Throwable;
 
-class ProcessSubscription implements ShouldBeUnique, ShouldQueue
+class PriceCheck implements ShouldBeUnique, ShouldQueue
 {
     use Queueable;
 
@@ -30,10 +30,10 @@ class ProcessSubscription implements ShouldBeUnique, ShouldQueue
     /**
      * @throws Throwable
      */
-    public function handle(ParserFactoryInterface $parserFactory, ProcessSubscriptionAction $processSubscription): void
+    public function handle(ParserFactoryInterface $parserFactory, CheckPriceAction $checkPriceAction): void
     {
         try {
-            $processSubscription->handle($this->subscription, $parserFactory);
+            $checkPriceAction->handle($this->subscription, $parserFactory);
         } catch (Throwable $e) {
             report($e);
         }

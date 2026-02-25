@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Subscription\ProcessSubscriptions;
+use App\Services\Subscription\CheckAllPrices;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -20,9 +20,9 @@ return Application::configure(basePath: dirname(__DIR__))
     })->withSchedule(function (Schedule $schedule) {
         $checkIntervalInMinutes = config('subscriptions.check_interval_in_minutes');
 
-        $schedule->call(new ProcessSubscriptions)->everyMinute();
+        $schedule->call(new CheckAllPrices)->everyMinute();
 
-        $schedule->call(new ProcessSubscriptions)
+        $schedule->call(new CheckAllPrices)
             ->everyMinute()
             ->when(function () use ($checkIntervalInMinutes) {
                 $lastRun = Cache::get('last_run_process_subscriptions');
