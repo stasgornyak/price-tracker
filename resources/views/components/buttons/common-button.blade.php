@@ -3,7 +3,8 @@
     'iconPosition' => 'left',
     'variant' => 'primary',
     'size' => 'default',
-    'rounded' => false
+    'rounded' => false,
+    'isLink' => false,
 ])
 
 @php
@@ -18,9 +19,9 @@
     ];
 
     $sizeClasses = [
-        'sm' => $rounded ? 'p-1.5' : 'px-1.5 py-1.5 text-sm',
-        'default' => $rounded ? 'p-2' : 'px-2 py-2',
-        'lg' => $rounded ? 'p-3' : 'px-2.5 py-2.5 text-lg',
+        'sm' => $rounded ? 'p-1.5' : ($slot->isNotEmpty() ? 'px-3 py-1.5 text-sm' : 'px-1.5 py-1.5 text-sm'),
+        'default' => $rounded ? 'p-2' : ($slot->isNotEmpty() ? 'px-4 py-2' : 'px-2 py-2'),
+        'lg' => $rounded ? 'p-3' : ($slot->isNotEmpty() ? 'px-5 py-2.5 text-lg' : 'px-2.5 py-2.5 text-lg'),
     ];
 
     $iconSizeClasses = [
@@ -39,18 +40,17 @@
     $classes = $baseClasses . ' ' . $variantClasses[$variant] . ' ' . $sizeClasses[$size];
     $iconSize = $iconSizeClasses[$size];
     $iconClass = $iconClasses[$variant];
+    $element = $isLink ? 'a' : 'button';
 @endphp
 
-<button {{ $attributes->merge(['class' => $classes]) }}>
+<{{ $element }} {{ $attributes->merge(['class' => $classes]) }}>
     @if($icon && $iconPosition === 'left')
         @svg($icon, $iconClass)
-        {{--@include("icons.{$icon}", ['class' => $iconSize . ($slot->isEmpty() ? '' : ' mr-2')])--}}
     @endif
 
     {{ $slot }}
 
     @if($icon && $iconPosition === 'right')
         @svg($icon, $iconClass)
-        {{--@include("icons.{$icon}", ['class' => $iconSize . ($slot->isEmpty() ? '' : ' ml-2')])--}}
     @endif
-</button>
+</{{ $element }}>

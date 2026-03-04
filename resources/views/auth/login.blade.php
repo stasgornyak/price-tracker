@@ -29,7 +29,8 @@
                 </div>
 
                 <!-- Login Button -->
-                <x-buttons.button type="primary" class="w-full">{{ __('Sign In') }}</x-buttons.button>
+                <x-buttons.common-button variant="primary" class="w-full">{{ __('Sign In') }}</x-buttons.common-button>
+                {{--<x-buttons.button type="primary" class="w-full">{{ __('Sign In') }}</x-buttons.button>--}}
             </form>
 
             @if (Route::has('register'))

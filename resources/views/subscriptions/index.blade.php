@@ -28,8 +28,9 @@
                                 </div>
                             @endif
 
-                        <x-buttons.link-button href="{{ route('subscriptions.create') }}"
-                                       class="mb-4">{{ __('Add Subscription') }}</x-buttons.link-button>
+                        <x-buttons.common-button href="{{ route('subscriptions.create') }}"
+                                       variant="primary" :is-link="true"
+                                       class="mb-4">{{ __('Add Subscription') }}</x-buttons.common-button>
 
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead>
@@ -75,16 +76,16 @@
                                         {{ $subscription->price_checked_at ? $subscription->price_checked_at->format('d.m.Y H:i') : '–' }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900 flex flex-nowrap gap-2 align-top">
-                                        <x-buttons.icon-link-button icon="fas-file-pen"
-                                                            variant="primary"
-                                                            href="{{ route('subscriptions.edit', $subscription) }}"/>
+                                        <x-buttons.common-button icon="fas-file-pen" :is-link="true" variant="primary"
+                                            href="{{ route('subscriptions.edit', $subscription) }}"/>
 
                                         <form action="{{ route('subscriptions.destroy', $subscription) }}"
                                               class="inline-block" method="POST"
                                               onsubmit="return confirm('{{ __('Are you sure?') }}')">
                                             @csrf
                                             @method('DELETE')
-                                            <x-buttons.icon-button icon="fas-trash" type="submit" variant="danger" />
+                                            <x-buttons.common-button icon="fas-trash" type="submit"
+                                                variant="danger" />
                                         </form>
                                     </td>
                                 </tr>

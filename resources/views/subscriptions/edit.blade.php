@@ -54,9 +54,9 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-buttons.primary-button>
+                                <x-buttons.common-button variant="primary">
                                     {{ __('Save') }}
-                                </x-buttons.primary-button>
+                                </x-buttons.common-button>
                             </div>
                         </form>
                     </div>

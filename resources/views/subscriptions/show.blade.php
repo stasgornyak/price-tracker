@@ -14,17 +14,17 @@
     <div class="mb-6 flex justify-between items-center">
         <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ __('Subscription details') }}</h1>
         <div class="flex gap-2">
-            <x-buttons.link-button href="{{ route('subscriptions.edit', $subscription) }}">
+            <x-buttons.common-button href="{{ route('subscriptions.edit', $subscription) }}" :is-link="true" variant="primary">
                 {{ __('Edit') }}
-            </x-buttons.link-button>
+            </x-buttons.common-button>
             <form action="{{ route('subscriptions.destroy', $subscription) }}"
                   method="POST"
                   onsubmit="return confirm('{{ __('Are you sure?') }}')">
                 @csrf
                 @method('DELETE')
-                <x-buttons.primary-button class="bg-red-600 hover:bg-red-700">
+                <x-buttons.common-button variant="danger">
                     {{ __('Delete') }}
-                </x-buttons.primary-button>
+                </x-buttons.common-button>
             </form>
         </div>
     </div>

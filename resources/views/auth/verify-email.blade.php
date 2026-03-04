@@ -20,9 +20,9 @@
 
             <form method="POST" action="{{ route('verification.store') }}">
                 @csrf
-                <x-buttons.button type="primary" buttonType="submit" class="w-full">
+                <x-buttons.common-button variant="primary" type="submit" class="w-full">
                     {{ __('Resend Verification Email') }}
-                </x-buttons.button>
+                </x-buttons.common-button>
             </form>
 
             <div class="text-center mt-6">

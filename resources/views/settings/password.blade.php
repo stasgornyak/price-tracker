@@ -51,7 +51,7 @@
                             </div>
 
                             <div>
-                                <x-buttons.button type="primary">{{ __('Update Password') }}</x-buttons.button>
+                                <x-buttons.common-button variant="primary">{{ __('Update Password') }}</x-buttons.common-button>
                             </div>
                         </form>
                     </div>
