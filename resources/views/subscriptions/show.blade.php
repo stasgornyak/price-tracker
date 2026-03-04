@@ -82,6 +82,46 @@
                                 <div class="mt-2 p-4 bg-gray-50 rounded-lg text-gray-700 whitespace-pre-wrap">{{ $subscription->notes }}</div>
                             </div>
                         @endif
+
+                        <div class="md:col-span-2">
+                            <h3 class="text-lg font-medium text-gray-900">{{ __('Price History') }}</h3>
+                            @if($priceHistory->isEmpty())
+                                <p class="mt-2 text-gray-500">{{ __('No price history yet.') }}</p>
+                            @else
+                                <div class="mt-2 overflow-x-auto">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead>
+                                            <tr>
+                                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">{{ __('Date') }}</th>
+                                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">{{ __('Price') }}</th>
+                                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-500">{{ __('Change') }}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="divide-y divide-gray-100">
+                                            @foreach($priceHistory as $record)
+                                                @php
+                                                    $next = $priceHistory[$loop->index + 1] ?? null;
+                                                    $diff = $next ? $record->price - $next->price : null;
+                                                @endphp
+                                                <tr>
+                                                    <td class="px-4 py-2 text-sm text-gray-700">{{ $record->recorded_at->format('d.m.Y H:i') }}</td>
+                                                    <td class="px-4 py-2 text-sm text-gray-900">{{ number_format($record->price, 2, '.', ' ') }} UAH</td>
+                                                    <td class="px-4 py-2 text-sm">
+                                                        @if($diff === null)
+                                                            <span class="text-gray-400">—</span>
+                                                        @elseif($diff > 0)
+                                                            <span class="text-red-600">+{{ number_format($diff, 2, '.', ' ') }} UAH</span>
+                                                        @else
+                                                            <span class="text-green-600">{{ number_format($diff, 2, '.', ' ') }} UAH</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

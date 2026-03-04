@@ -54,6 +54,8 @@ class CheckPriceAction
                 'price_checked_at' => $priceCheckedAt,
             ]);
 
+            app(SavePriceHistoryAction::class)->handle($this->subscription, $newPrice);
+
             return;
         }
 
@@ -62,6 +64,8 @@ class CheckPriceAction
                 'current_price' => $newPrice,
                 'price_checked_at' => $priceCheckedAt,
             ]);
+
+            app(SavePriceHistoryAction::class)->handle($this->subscription, $newPrice);
 
             PriceChanged::dispatch($this->subscription, $oldPrice);
         });
