@@ -20,14 +20,13 @@ return Application::configure(basePath: dirname(__DIR__))
     })->withSchedule(function (Schedule $schedule) {
         $checkIntervalInMinutes = config('subscriptions.check_interval_in_minutes');
 
-        $schedule->call(new CheckAllPrices)->everyMinute();
-
         $schedule->call(new CheckAllPrices)
             ->everyMinute()
             ->when(function () use ($checkIntervalInMinutes) {
                 $lastRun = Cache::get('last_run_process_subscriptions');
-                if (! $lastRun || now()->diffInMinutes($lastRun) >= $checkIntervalInMinutes) {
-                    Cache::put('last_run_process_subscriptions', now(), now()->addMinutes(110));
+
+                if (! $lastRun || now()->diffInMinutes($lastRun, true) >= $checkIntervalInMinutes) {
+                    Cache::put('last_run_process_subscriptions', now(), now()->addMinutes($checkIntervalInMinutes));
 
                     return true;
                 }

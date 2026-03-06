@@ -24,3 +24,4 @@ yarn-error.log
 /.junie
 .DS_Store
 /app/Console/Commands/TestCommand.php
+/.claude/settings.local.json

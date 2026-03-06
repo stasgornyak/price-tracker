@@ -17,8 +17,8 @@
 
     <div class="pt-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="overflow-hidden overflow-x-auto p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
                     <div class="min-w-full align-middle">
 
                         @if(session()->has('error'))
@@ -54,9 +54,9 @@
                             </div>
 
                             <div class="mt-4">
-                                <x-buttons.primary-button>
+                                <x-buttons.common-button variant="primary">
                                     {{ __('Save') }}
-                                </x-buttons.primary-button>
+                                </x-buttons.common-button>
                             </div>
                         </form>
                     </div>

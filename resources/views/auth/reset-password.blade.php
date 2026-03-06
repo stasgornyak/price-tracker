@@ -31,9 +31,9 @@
                 </div>
 
                 <!-- Reset Password Button -->
-                <x-buttons.button type="primary" buttonType="submit" class="w-full">
+                <x-buttons.common-button variant="primary" type="submit" class="w-full">
                     {{ __('Reset Password') }}
-                </x-buttons.button>
+                </x-buttons.common-button>
             </form>
 
             <!-- Back to Login Link -->

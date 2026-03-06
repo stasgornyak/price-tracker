@@ -30,7 +30,8 @@
                 </div>
 
                 <!-- Register Button -->
-                <x-buttons.button type="primary" class="w-full">{{ __('Create Account') }}</x-buttons.button>
+                <x-buttons.common-button variant="primary" class="w-full">{{ __('Create Account') }}</x-buttons.common-button>
+                {{--<x-buttons.button type="primary" class="w-full">{{ __('Create Account') }}</x-buttons.button>--}}
             </form>
 
             <!-- Login Link -->

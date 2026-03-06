@@ -47,7 +47,7 @@
                             </div>
 
                             <div>
-                                <x-buttons.button type="primary">{{ __('Save') }}</x-buttons.button>
+                                <x-buttons.common-button variant="primary">{{ __('Save') }}</x-buttons.common-button>
                             </div>
                         </form>
 
@@ -63,7 +63,7 @@
                                 onsubmit="return confirm('{{ __('Are you sure you want to delete your account?') }}')">
                                 @csrf
                                 @method('DELETE')
-                                <x-buttons.button type="danger">{{ __('Delete account') }}</x-buttons.button>
+                                <x-buttons.common-button variant="danger">{{ __('Delete account') }}</x-buttons.common-button>
                             </form>
                         </div>
                     </div>

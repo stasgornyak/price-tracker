@@ -64,7 +64,9 @@ class SubscriptionController extends Controller
                 ->with('error', 'Subscription not found.');
         }
 
-        return view('subscriptions.show', compact('subscription'));
+        $priceHistory = $subscription->priceHistory()->limit(20)->get();
+
+        return view('subscriptions.show', compact('subscription', 'priceHistory'));
     }
 
     public function edit(string $id): RedirectResponse|View
